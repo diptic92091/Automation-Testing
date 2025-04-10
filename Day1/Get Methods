@@ -1,0 +1,27 @@
+package day1;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
+public class Getmethod {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		RemoteWebDriver driver;
+		driver = new EdgeDriver();
+		driver.get("https://www.facebook.com/");
+		System.out.println(driver.getCurrentUrl());
+		System.out.println(driver.getTitle());
+		System.out.println(driver.getPageSource());
+		
+		driver.findElement(By.id("email")).sendKeys("dipti@gmail.com");
+		driver.findElement(By.id("pass")).sendKeys("1234567");
+		driver.findElement(By.linkText("Log in")).click();
+		
+		
+		
+	}
+
+}
