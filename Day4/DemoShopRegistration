@@ -1,0 +1,53 @@
+package day4;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class DemoShopRegistration {
+
+	    public static void main(String[] args) throws InterruptedException {
+	        // System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+
+	        WebDriver driver = new ChromeDriver();
+
+	        driver.get("https://demowebshop.tricentis.com/register");
+
+	        driver.manage().window().maximize();
+
+	        WebElement genderfeMale = driver.findElement(By.id("gender-female"));
+	        genderfeMale.click();
+
+	        WebElement firstName = driver.findElement(By.id("FirstName"));
+	        firstName.sendKeys("Dipti");
+	        
+	        WebElement lastName = driver.findElement(By.id("LastName"));
+	        lastName.sendKeys("Chavan");
+
+	        WebElement email = driver.findElement(By.id("Email"));
+	        email.sendKeys("DiptiChavan@gmail.com");
+
+	        WebElement password = driver.findElement(By.id("Password"));
+	        password.sendKeys("dipti@1234");
+
+	        WebElement confirmPassword = driver.findElement(By.id("ConfirmPassword"));
+	        confirmPassword.sendKeys("dipti@1234");
+
+	        WebElement registerBtn = driver.findElement(By.id("register-button"));
+	        registerBtn.click();
+
+	        Thread.sleep(3000);
+
+	        String confirmation = driver.findElement(By.className("result")).getText();
+	        System.out.println("Registration Status: " + confirmation);
+	        JavascriptExecutor js = (JavascriptExecutor) driver;
+	        js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+
+	        Thread.sleep(1000);
+
+	        driver.quit();
+	    }
+	}
+
+
