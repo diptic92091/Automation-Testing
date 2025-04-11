@@ -1,0 +1,30 @@
+package day4;
+
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+
+public class Scrolling {
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+
+		
+		WebDriver driver = new EdgeDriver();
+        driver.get("http://demowebshop.tricentis.com/");
+        driver.manage().window().maximize();
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        // Scroll down in increments
+        for (int i = 0; i < 5; i++) {
+            js.executeScript("window.scrollBy(0, 500);");
+            Thread.sleep(1500);
+        }
+
+        driver.quit();
+		
+		
+	}
+
+}
