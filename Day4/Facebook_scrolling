@@ -1,0 +1,58 @@
+package day4;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+
+public class Facebook_scrolling {
+
+	public static void main(String[] args)  throws InterruptedException{
+		// TODO Auto-generated method stub
+
+	
+
+		WebDriver driver = new ChromeDriver();
+
+        driver.get("https://www.facebook.com/r.php?entry_point=login");
+
+        driver.manage().window().maximize();
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+        js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+
+        Thread.sleep(3000);
+        
+        driver.findElement(By.name("firstname")).sendKeys("Dipti");
+
+        driver.findElement(By.name("lastname")).sendKeys("Chavan");
+
+        driver.findElement(By.name("reg_email__")).sendKeys("Dipti.chavan@gmail.com");
+
+        driver.findElement(By.id("password_step_input")).sendKeys("StrongPassword123");
+
+        Select day = new Select(driver.findElement(By.id("day")));
+        day.selectByVisibleText("9");
+
+        Select month = new Select(driver.findElement(By.id("month")));
+        month.selectByVisibleText("Oct");
+        Select year = new Select(driver.findElement(By.id("year")));
+        year.selectByVisibleText("2003");
+
+       // driver.findElement(By.xpath("//label[text()='Female']/following-sibling::input")).click();
+        driver.findElement(By.xpath("//input[@name='sex' and @value='1']")).click();
+      
+        driver.findElement(By.name("websubmit")).click();
+        
+        
+        
+        driver.quit();
+		    }
+
+		
+		
+		
+	}
+
+
