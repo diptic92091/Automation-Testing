@@ -1,0 +1,26 @@
+package day6;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Authentication {
+
+	
+	public static String Username = "admin";
+	public static String Password ="admin";
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		
+		WebDriver driver;
+		
+		driver = new ChromeDriver();
+		
+		driver.get("https://"+Username+":"+Password+"@the-internet.herokuapp.com/basic_auth");
+		
+	
+		
+	}
+
+}
