@@ -1,0 +1,55 @@
+package day8;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+public class Writer_into_excel {
+
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+		
+		XSSFWorkbook workbook = new XSSFWorkbook();
+		XSSFSheet sheet = workbook.createSheet("Student_data");
+		
+		Object empdata[][] = {{"StudentId","Name","Location"},
+				{01,"Dipti"},{02,"Manjusha"},{03,"Dimpal"},{04,"Harini"},{05,"Laxmi"}};
+		int rows = empdata.length;
+		int cols = empdata[4].length;
+		
+		System.out.println(rows);
+		System.out.println(cols);
+		
+		for (int r=0; r<rows;r++)
+		{
+			XSSFRow row  = sheet.createRow(r);
+			
+			for(int c=0;c<cols;c++)
+			{
+				XSSFCell cell = row.createCell(c);
+				Object value = empdata[r][c];
+				
+				if(value instanceof String )
+					cell.setCellValue((String)value);
+				if(value instanceof Integer )
+					cell.setCellValue((Integer)value);
+				if(value instanceof Boolean )
+					cell.setCellValue((Boolean)value);
+					
+			}
+			
+		}
+		String filepath=".\\File\\Student.xlsx";
+		FileOutputStream outstream = new FileOutputStream(filepath);
+		workbook.write(outstream);
+		
+		outstream.close();
+		
+		System.out.println("Student data  insert successfully");
+		
+		
+	}
+
+}
