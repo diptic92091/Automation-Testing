@@ -1,0 +1,44 @@
+package day10;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.*;
+
+import java.time.Duration;
+
+public class LoginAndAccountTest {
+
+    WebDriver driver;
+    LoginPage loginPage;
+
+    @BeforeClass
+    public void setup() {
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.get("https://demowebshop.tricentis.com/login");
+
+        loginPage = new LoginPage(driver);
+    }
+
+    @Test
+    public void loginAndFillAddressTest() {
+        // Perform login
+        loginPage.login("diptirc65@gmail.com", "Dipti@123");
+
+        // Navigate to My Account and then to Addresses
+        loginPage.goToMyAccount();
+        loginPage.goToAddressesAndAddNew();
+
+        loginPage.fillAddressForm(
+                "Virat", "Kohli", "virat18@gmail.com",
+                "RCB Corp", "India", "Bangalore", "Chinnaswamy Stadium","2345","9999999999"
+        );
+    }
+
+    @AfterClass
+    public void tearDown() throws InterruptedException {
+        Thread.sleep(3000); // Just to see changes before browser closes
+        driver.quit();
+    }
+}
