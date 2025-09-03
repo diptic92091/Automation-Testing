@@ -1,0 +1,77 @@
+package day7;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import java.io.File;
+import java.io.IOException;
+import java.time.Duration;
+
+
+public class DemoWebShopAutomation {
+	    public static void main(String[] args) throws IOException {
+	    	// TODO Auto-generated method stub
+	       
+	        WebDriver driver = new ChromeDriver();
+	        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+	        driver.manage().window().maximize();
+
+	        try {
+	            driver.get("https://demowebshop.tricentis.com/");
+	            driver.findElement(By.xpath("/html/body/div[4]/div[1]/div[1]/div[2]/div[1]/ul/li[1]/a")).click();
+
+	            driver.findElement(By.id("gender-female")).click();
+	            driver.findElement(By.id("FirstName")).sendKeys("Dipti");
+	            driver.findElement(By.id("LastName")).sendKeys("Chavan");
+
+	            String email = "d45@gmail.com";
+	            driver.findElement(By.id("Email")).sendKeys(email);
+
+	            driver.findElement(By.id("Password")).sendKeys("Pass@1234");
+	            driver.findElement(By.id("ConfirmPassword")).sendKeys("Pass@1234");
+
+	            driver.findElement(By.id("register-button")).click();
+	            driver.findElement(By.xpath("/html/body/div[4]/div[1]/div[4]/div[2]/div/div[2]/div[2]/input")).click();
+	            
+	            Thread.sleep(2000); 
+	            driver.navigate().back();
+
+	            driver.findElement(By.id("small-searchterms")).sendKeys("digital");        
+	            driver.findElement(By.xpath("/html/body/div[4]/div[1]/div[1]/div[3]/form/input[2]")).click();          
+	            
+	            Thread.sleep(2000);
+	            
+	            JavascriptExecutor js = (JavascriptExecutor) driver;        //Scrolling
+	            js.executeScript("window.scrollBy(0,500)");
+	            driver.findElement(By.xpath("/html/body/div[4]/div[1]/div[4]/div[2]/div/div[2]/div[3]/div[1]/div/div/div[2]/h2/a")).click();
+	            
+	            JavascriptExecutor js1 = (JavascriptExecutor) driver;
+	            js1.executeScript("window.scrollBy(0,1000)");
+
+	            driver.findElement(By.xpath("(//input[@value='Add to cart'])[2]")).click();
+	            
+	            TakesScreenshot ts =(TakesScreenshot)driver;
+	    		File sourcefile = ts.getScreenshotAs(OutputType.FILE);
+	    		File targetfile = new File(System.getProperty("user.dir")+("\\Screenshots\\Excelr3.png"));
+	    		sourcefile.renameTo(targetfile);
+
+	    		driver.findElement(By.xpath("/html/body/div[4]/div[1]/div[1]/div[2]/div[1]/ul/li[3]/a/span[1]")).click();  //click on shoppingCardLink 		
+	            //driver.findElement(By.partialLinkText("Shopping cart")).click();
+	           
+	            WebElement checkBox = driver.findElement(By.id("termsofservice"));
+	            if (!checkBox.isSelected()) {
+	                checkBox.click();
+	            }   
+	            Thread.sleep(3000);
+	            driver.findElement(By.id("checkout")).click();
+
+	        } catch (Exception e) {
+	            System.out.println("Exception: " + e.getMessage());
+	        } finally {
+	           
+	            driver.quit();
+	        }
+	    }
+	}
+
+	
+	
+
