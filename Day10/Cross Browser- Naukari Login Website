@@ -1,0 +1,53 @@
+package day10;
+
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.testng.annotations.*;
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class CrossBrowserNaukariLogin {
+
+    WebDriver driver;
+
+    @Parameters("browser")
+    @BeforeMethod
+    public void setup(@Optional("chrome") String browserName) {
+        if (browserName.equalsIgnoreCase("chrome")) {
+            WebDriverManager.chromedriver().setup();
+            driver = new ChromeDriver();
+        } else if (browserName.equalsIgnoreCase("edge")) {
+            WebDriverManager.edgedriver().setup();
+            driver = new EdgeDriver();
+        } else {
+            throw new IllegalArgumentException("Browser not supported: " + browserName);
+        }
+
+        driver.manage().window().maximize();
+    }
+
+    @Test
+    public void naukriLoginTest() throws InterruptedException {
+        driver.get("https://www.naukri.com/nlogin/login");
+
+        driver.findElement(By.id("usernameField")).sendKeys("diptirc5655@gmail.com");
+
+        driver.findElement(By.id("passwordField")).sendKeys("Dipti@123");
+
+        driver.findElement(By.xpath("//button[@type='submit']")).click();
+
+       System.out.println("Successfully login in both browser");
+        Thread.sleep(3000); 
+    }
+    @AfterMethod
+    public void tearDown() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
+}
+
+
+
