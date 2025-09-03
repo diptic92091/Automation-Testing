@@ -1,0 +1,41 @@
+package day10;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+public class LoginPage_new {
+
+	WebDriver Driver;
+	
+	@FindBy (id="Email")
+	private WebElement emailInput;
+	
+	@FindBy (id = "Password")
+	private WebElement passwordInput;
+	
+	@FindBy (xpath = "//input[@value='Log in']")
+	private WebElement loginbutton;
+	
+	//LoginPage_new login = new LoginPage_new();
+	LoginPage_new(WebDriver driver)
+	{
+		this.Driver = driver;
+		PageFactory.initElements(driver, this);		
+	}
+	public void enterEmail(String email)
+	{	
+		emailInput.clear();
+		emailInput.sendKeys(email);	
+	}
+	public void enterPassword(String password)
+	{
+		emailInput.clear();
+		emailInput.sendKeys(password);	
+	}
+	public void clickLogin()
+	{		
+		loginbutton.click();
+	}
+}
