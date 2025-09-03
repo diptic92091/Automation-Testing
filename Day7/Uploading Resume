@@ -1,0 +1,54 @@
+package day7;
+
+import java.time.Duration;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class Resume_uploading {
+
+    public static void main(String[] args) throws InterruptedException {
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+
+        try {
+            driver.get("https://www.naukri.com/nlogin/login");
+
+            driver.findElement(By.cssSelector("#usernameField")).sendKeys("diptirc5655@gmail.com");
+            driver.findElement(By.cssSelector("#passwordField")).sendKeys("Dipti@123");
+            driver.findElement(By.cssSelector("button[type='submit']")).click();
+
+            System.out.println("Successfully logged in");
+
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+
+            // Close ad popup if appears
+            try {
+                WebElement closeBtn = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(".close-btn")));
+                closeBtn.click();
+                System.out.println("Advertisement popup closed.");
+            } catch (Exception e) {
+                System.out.println("No advertisement popup appeared.");
+            }
+
+            WebElement completeProfileLink = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                    By.xpath("//a[@href='/mnjuser/profile']")));
+            completeProfileLink.click();
+            System.out.println("Navigated to Complete Profile section.");
+
+            WebElement fileInput = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@type='file']")));
+
+            String filePath = "D:\\Downloads\\Dipti's Resume D.pdf"; 
+            fileInput.sendKeys(filePath);
+            System.out.println(" Resume uploaded successfully.");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // driver.quit(); 
+        }
+    }
+}
