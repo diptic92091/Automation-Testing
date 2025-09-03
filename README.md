@@ -1,7 +1,7 @@
 📌 Overview
 
-This project contains automation test scripts developed using [mention tool: Selenium / Playwright / Cypress / etc.] with [language: Java / Python / JavaScript].
-The goal of this project is to automate the testing of [mention website/application name], ensuring functionality, reliability, and better test coverage.
+This contains automation test scripts developed using [mention tool: Selenium ] with [language: Java / JavaScript].
+The goal of this is to automate the testing of [Amazon ,DemoWebsite,Flipkart], ensuring functionality, reliability, and better test coverage.
 
 🛠️ Tech Stack
 
