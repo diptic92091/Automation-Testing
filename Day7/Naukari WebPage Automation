@@ -1,0 +1,46 @@
+package day7;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Nauraki_webPage {
+
+    public static void main(String[] args) throws InterruptedException {
+
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+
+        driver.get("https://www.naukri.com/nlogin/login");
+
+        driver.findElement(By.cssSelector("#usernameField")).sendKeys("diptirc5655@gmail.com");
+        driver.findElement(By.cssSelector("#passwordField")).sendKeys("Dipti@123");
+        driver.findElement(By.cssSelector("button[type='submit']")).click();
+
+        System.out.println("Successfully logged in");
+
+        Thread.sleep(5000);
+
+        driver.findElement(By.cssSelector(".nI-gNb-sb__placeholder")).click();
+        driver.findElement(By.cssSelector("input.suggestor-input[placeholder='Enter keyword / designation / companies']")).sendKeys("Software Testing");
+
+        WebElement dropdownContainer = driver.findElement(
+        	    By.cssSelector(".dropDownPrimaryContainer.dropdownShow")
+        	);
+        	dropdownContainer.click();
+
+        	Thread.sleep(2000);
+        	WebElement jobOption = driver.findElement(
+        	    By.xpath("//div[text()='Job']")
+        	);
+        	jobOption.click();
+        
+        driver.findElement(By.cssSelector("span.ni-gnb-icn.ni-gnb-icn-search")).click();
+
+        System.out.println("Search submitted");
+
+        Thread.sleep(5000);
+        driver.quit();
+    }
+}
