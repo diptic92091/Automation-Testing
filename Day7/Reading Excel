@@ -1,0 +1,48 @@
+package day7;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+public class ReadingExcel {
+
+	public static void main(String[] args) throws IOException {
+		// TODO Auto-generated method stub
+
+		String excelfilepath =".\\File\\Excelr.xlsx";
+		FileInputStream inputstrem = new FileInputStream(excelfilepath);
+		
+		XSSFWorkbook workbook = new XSSFWorkbook(inputstrem);   //workbook instance
+		XSSFSheet sheet = workbook.getSheetAt(0);
+		int rows= sheet.getLastRowNum();
+		int cols = sheet.getRow(1).getLastCellNum();
+		
+		for(int r=0;r<=rows;r++)    // Get the current row.
+		{
+			XSSFRow row =sheet.getRow(r);
+			
+			for(int c=0;c<cols;c++)
+			{
+				XSSFCell cell = row.getCell(c);                                          //Get the cell at column c in the current row.
+				
+				switch (cell.getCellType())                                             //check what type of data is in the cell
+				{
+				case STRING :System.out.println(cell.getStringCellValue());break;       // Checks if the cell contains a string
+				case NUMERIC :System.out.println(cell.getNumericCellValue());break;     //Checks if the cell contains a numerical
+				case BOOLEAN : System.out.println(cell.getBooleanCellValue());break;    //Checks if the cell contains a boolean
+				
+				
+				}
+				
+			}	
+			
+		}
+		
+		
+	}
+
+}
