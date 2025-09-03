@@ -1,0 +1,36 @@
+package day10;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+
+public class DataAnnotation_eg {
+    WebDriver driver;
+
+    @Test(dataProvider = "automationdata")
+    public void logintopage(String username, String password) {
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://demowebshop.tricentis.com/login");
+        driver.findElement(By.id("Email")).sendKeys(username);
+        driver.findElement(By.id("Password")).sendKeys(password); 
+        driver.quit();
+    }
+    @DataProvider(name = "automationdata")
+    public Object[][] passdata() {
+        Object[][] data = new Object[3][2];
+
+        data[0][0] = "admin1";
+        data[0][1] = "admin2";
+
+        data[1][0] = "admin3";
+        data[1][1] = "admin2";
+
+        data[2][0] = "admin4";
+        data[2][1] = "admin2";
+
+        return data;
+    }
+}
