@@ -1,0 +1,31 @@
+package day9;
+
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+public class Method_level {
+
+	@BeforeMethod
+    public void beforeMethod() {
+        System.out.println("Before Method...Runs before each test method.");
+    }
+
+    @AfterMethod
+    public void afterMethod() {
+        System.out.println("After Method....Runs after each test method.");
+    }
+
+    @Test
+    public void test1() {
+        System.out.println("Executing test1 in MethodLevelTest");
+    }
+
+    @Test
+    public void test2() {
+        System.out.println("Executing test2 in MethodLevelTest");
+    }
+	
+	
+	
+}
