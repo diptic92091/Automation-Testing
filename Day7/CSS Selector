@@ -1,0 +1,52 @@
+package day7;
+
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import java.time.Duration;
+
+public class Css_Selector {
+
+	public static void main(String[] args) throws InterruptedException {
+		// TODO Auto-generated method stub
+
+        WebDriver driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.manage().window().maximize();
+
+        driver.get("https://demowebshop.tricentis.com/");
+
+        // using class,attribute selector
+        driver.findElement(By.cssSelector("a[href='/register']")).click();
+
+        
+        driver.findElement(By.cssSelector("#gender-female")).click();      // by ID
+
+        driver.findElement(By.cssSelector("#FirstName")).sendKeys("Dipti");  // using ID
+
+        driver.findElement(By.cssSelector("#LastName")).sendKeys("Chavan");
+
+        driver.findElement(By.cssSelector("#Email")).sendKeys("d49095@gmail.com");
+        driver.findElement(By.cssSelector("#Password")).sendKeys("Pass@1234");
+        driver.findElement(By.cssSelector("#ConfirmPassword")).sendKeys("Pass@1234");
+        driver.findElement(By.cssSelector("#register-button")).click();
+
+        //class,attribute selector
+        driver.findElement(By.cssSelector("input.button-1[onclick='location.href=\'/\';']")).click();
+
+        Thread.sleep(2000);
+        driver.navigate().back();
+        driver.findElement(By.cssSelector("#small-searchterms")).sendKeys("digital");
+        driver.findElement(By.cssSelector("input[type='submit']")).click();   // attribute
+
+        Thread.sleep(2000);
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,500)");
+
+        driver.findElement(By.cssSelector("a[href='/digital-storm-vanquish-3-custom-performance-pc']")).click();   // using class,attribute
+        js.executeScript("window.scrollBy(0,1000)");
+
+        driver.findElement(By.cssSelector("input.button-1[onclick*='addproducttocart']")).click();       // using class,attribute
+        driver.quit();
+    }
+}
