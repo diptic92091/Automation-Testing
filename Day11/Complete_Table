@@ -1,0 +1,36 @@
+package day11;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Complete_Table {
+
+    public static void main(String[] args) {
+
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://demo.guru99.com/test/web-table-element.php");
+        WebElement table = driver.findElement(By.xpath("//*[@id='leftcontainer']/table"));
+
+        List<WebElement> rowtab = table.findElements(By.xpath(".//tbody/tr"));
+        int rowcount = rowtab.size();
+        System.out.println("Total number of rows: " + rowcount);
+       
+        for (int row = 0; row < rowcount; row++) {
+            List<WebElement> coltab = rowtab.get(row).findElements(By.tagName("td"));
+            int colcount = coltab.size();
+            
+            for (int column = 0; column < colcount; column++) {
+                String text = coltab.get(column).getText();
+                System.out.print(text + "   "); 
+            }
+            System.out.println(); 
+        }
+        
+        driver.quit();
+    }
+}
