@@ -1,0 +1,40 @@
+package day10;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.testng.annotations.*;
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+public class Cross_Browser {
+
+    WebDriver driver;
+
+    @Parameters("browser")
+    @BeforeMethod
+    public void setup(@Optional("chrome") String browserName) {
+        if (browserName.equalsIgnoreCase("chrome")) {
+            WebDriverManager.chromedriver().setup();  // Auto handles ChromeDriver
+            driver = new ChromeDriver();
+        } else if (browserName.equalsIgnoreCase("edge")) {
+            WebDriverManager.edgedriver().setup();    // Auto handles EdgeDriver
+            driver = new EdgeDriver();
+        } else {
+            throw new IllegalArgumentException("Browser not supported: " + browserName);
+        }
+
+        driver.manage().window().maximize();
+    }
+
+    @Test
+    public void openDemoWebShop() {
+        driver.get("https://demowebshop.tricentis.com/");
+    }
+
+    @AfterMethod
+    public void tearDown() {
+        if (driver != null) {
+            driver.quit();
+        }
+    }
+}
