@@ -1,0 +1,28 @@
+package day9;
+
+import org.testng.annotations.Test;
+
+public class Priority__ {
+
+	@Test(priority=2)
+	
+	public void testB()
+	{
+		
+		System.out.println("Running Test B");
+	}
+	@Test(priority=1)
+	
+	public void testA()
+	{
+		System.out.println("Running Test A");
+		
+		
+	}
+	@Test(priority = 0)
+    public void testC() {
+        System.out.println("Running test C");
+    }
+	
+	
+}
