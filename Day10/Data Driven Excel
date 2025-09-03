@@ -1,0 +1,46 @@
+package day10;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import java.io.IOException;
+import java.time.Duration;
+
+
+public class DataDriven_Excel {
+
+	public static void main(String[] args) throws IOException, InterruptedException {
+		// TODO Auto-generated method stub
+
+		WebDriver driver;
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		String excelPath ="C:\\Users\\admin\\eclipse-workspace\\Feb17_Selenium\\File\\Excelr.xlsx";
+		ExcelUtil excelUtil = new  ExcelUtil(excelPath , "Sheet1");
+		
+		driver.get("https://demowebshop.tricentis.com/login");
+		for (int i=1; i<=excelUtil.getRowCount(); i++)
+		{
+			String email = excelUtil.getCellData(i, 0);
+			String password = excelUtil.getCellData(i, 1);
+			WebElement emailfield = driver.findElement(By.id("Email"));
+			emailfield.clear();
+			emailfield.sendKeys(email);
+			WebElement Passwordfield = driver.findElement(By.id("Password"));
+			Passwordfield.clear();
+			Passwordfield.sendKeys(password);
+			
+			System.out.println("Successfully fill all data from ExcelSheet");
+		}
+		
+		
+		
+		Thread.sleep(5000);
+		driver.quit();
+		
+	}
+
+}
