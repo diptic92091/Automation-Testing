@@ -34,9 +34,6 @@ automation-testing/
 
 Clone the repository:
 
-git clone https://github.com/your-username/your-repo-name.git
-
-
 Navigate to the project folder:
 
 cd your-repo-name
